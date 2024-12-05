@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <h1>logout</h1>
+    </header>
+    <main>
+        <p>You successfully logged out<a href="{% url 'login' %}">Login again ?</a></p>
+    </main>
+</body>
+</html>

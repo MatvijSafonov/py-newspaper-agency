@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Newspaper Agency{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+{% include 'includes/sidebar.html' %}
+
+<header>
+    <h1>Newspaper Agency</h1>
+</header>
+
+<div id="main-content">
+    {% block content %}
+    {% endblock %}
+</div>
+
+<script src="{% static 'js/sidebar.js' %}"></script>
+</body>
+</html>
