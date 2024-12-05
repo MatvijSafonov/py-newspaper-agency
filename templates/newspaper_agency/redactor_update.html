@@ -1,0 +1,33 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Redactor</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+    {% endblock %}
+
+    <div id="content" class="content">
+        <h1 class="page-title">Edit Redactor: {{ redactor.first_name }} {{ redactor.last_name }}</h1>
+
+        <form method="post" id="edit-redactor-form">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.as_p }}
+            </div>
+
+            <button type="submit" class="submit-button">Update</button>
+            <div class="cancel-button">
+                <a href="{% url 'newspaper_agency:redactor_list' %}">
+                    <button type="button">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+

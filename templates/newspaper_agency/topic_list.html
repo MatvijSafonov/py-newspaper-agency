@@ -1,0 +1,31 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+        {% block sidebar %}
+            {% include "includes/sidebar.html" %}
+        {% endblock %}
+    
+    <div id="content" class="content">
+        <h1 class="page-title">List of Topics</h1>
+        <p class="topic-count">Total number of topics: {{ total_topics }}</p>
+        
+        <ul class="topic-list">
+            {% for topic in topics %}
+                <li class="topic-item">{{ topic.name }}</li>
+            {% empty %}
+                <li class="topic-item">No topics available.</li>
+            {% endfor %}
+        </ul>
+
+        <a href="{% url 'newspaper_agency:topic_form' %}" class="create-topic-link">
+            <button class="create-topic-button">Create New Topic</button>
+        </a>
+    </div>
+</body>
+</html>

@@ -3,20 +3,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from .views import (
     TopicListView,
+    TopicCreateView,
     NewspaperListView,
     NewspaperDetailView,
     RedactorListView,
+    RedactorCreateView,
+    RedactorUpdateView,
+    RedactorDeleteView,
     LoginView,
     RegisterView,
-    BaseView,
     CustomLogoutView,
 )
 
 urlpatterns = [
-    path("topics/", TopicListView.as_view(), name="topic-list"),
-    path("newspaper_list/", NewspaperListView.as_view(), name="newspaper-list"),
-    path("newspapers/<int:pk>/", NewspaperDetailView.as_view(), name="newspaper-detail"),
-    path("redactors/", RedactorListView.as_view(), name="redactor-list"),
+    path("topics/", TopicListView.as_view(), name="topic_list"),
+    path("topic_form/", TopicCreateView.as_view(), name="topic_form"),
+    path("newspaper_list/", NewspaperListView.as_view(), name="newspaper_list"),
+    path("newspapers/<int:pk>/", NewspaperDetailView.as_view(), name="newspaper_detail"),
+    path("redactors/", RedactorListView.as_view(), name="redactor_list"),
+    path("redactor_form/", RedactorCreateView.as_view(), name="redactor_form"),
+    path("redactors/<int:pk>/update/", RedactorUpdateView.as_view(), name="redactor_update"),
+    path("redactors/<int:pk>/delete/", RedactorDeleteView.as_view(), name="redactor_delete"),
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", CustomLogoutView.as_view(), name="logout"),
     path("register/", RegisterView.as_view(), name="register"),

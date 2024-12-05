@@ -1,7 +1,8 @@
 from django.contrib.auth.views import LoginView as BaseLoginView
 from django.contrib.auth.views import LogoutView
+from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import TemplateView
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.http import JsonResponse
 from django.views import View
 from django.views.generic.edit import CreateView
@@ -37,31 +38,30 @@ class CustomLogoutView(LogoutView):
 class TopicListView(View):
     def get(self, request):
         topics = Topic.objects.all()
-        data = [{"id": topic.id, "name": topic.name} for topic in topics]
-        return JsonResponse(data, safe=False)
+        context = {
+            "topics": topics,
+            "total_topics": topics.count()
+        }
+        return render(request, 'newspaper_agency/topic_list.html', context)
 
+class TopicCreateView(View):
+    def get(self, request):
+        return render(request, 'newspaper_agency/topic_form.html')
+
+    def post(self, request):
+        name = request.POST.get('name')
+        if name:
+            Topic.objects.create(name=name)
+            return redirect('topic_list')
+        return render(request, 'newspaper_agency/topic_form.html', {'error': 'Please provide a topic name.'})
 
 class NewspaperListView(View):
     def get(self, request):
         newspapers = Newspaper.objects.prefetch_related("topics", "publishers").all()
-        data = [
-            {
-                "id": newspaper.id,
-                "title": newspaper.title,
-                "published_date": newspaper.published_date,
-                "topics": [topic.name for topic in newspaper.topics.all()],
-                "publishers": [
-                    {
-                        "id": publisher.id,
-                        "name": f"{publisher.first_name} {publisher.last_name}",
-                        "username": publisher.username,
-                    }
-                    for publisher in newspaper.publishers.all()
-                ],
-            }
-            for newspaper in newspapers
-        ]
-        return JsonResponse(data, safe=False)
+        context = {
+            "newspapers": newspapers
+        }
+        return render(request, 'newspaper_agency/newspaper_list.html', context)
 
 
 class NewspaperDetailView(View):
@@ -88,14 +88,32 @@ class NewspaperDetailView(View):
 class RedactorListView(View):
     def get(self, request):
         redactors = Redactor.objects.all()
-        data = [
-            {
-                "id": redactor.id,
-                "username": redactor.username,
-                "first_name": redactor.first_name,
-                "last_name": redactor.last_name,
-                "years_of_experience": redactor.years_of_experience,
-            }
-            for redactor in redactors
-        ]
-        return JsonResponse(data, safe=False)
+        total_redactors = redactors.count()
+        context = {
+            "redactors": redactors,
+            "total_redactors": total_redactors
+        }
+        return render(request, 'newspaper_agency/redactor_list.html', context)
+
+class RedactorCreateView(View):
+    def get(self, request):
+        form = RedactorForm()
+        return render(request, 'newspaper_agency/redactor_form.html', {'form': form})
+
+    def post(self, request):
+        form = RedactorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('newspaper_agency:redactor_list')
+        return render(request, 'newspaper_agency/redactor_form.html', {'form': form})
+
+class RedactorUpdateView(UpdateView):
+    model = Redactor
+    fields = ['username', 'first_name', 'last_name', 'years_of_experience']
+    template_name = 'newspaper_agency/redactor_form.html'
+    success_url = reverse_lazy('newspaper_agency:redactor_list')
+
+class RedactorDeleteView(DeleteView):
+    model = Redactor
+    template_name = 'newspaper_agency/redactor_delete.html'
+    success_url = reverse_lazy('newspaper_agency:redactor_list')

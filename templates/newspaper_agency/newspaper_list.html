@@ -1,22 +1,36 @@
-<!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newspaper List</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <h1>List of Newspapers</h1>
+{% block sidebar %}
+    {% include "includes/sidebar.html" %}
+{% endblock %}
+
+<div id="content">
+    <h1 class="page-title">List of Newspapers</h1>
     <ul>
         {% for newspaper in newspapers %}
             <li>
                 <h2>{{ newspaper.title }}</h2>
                 <p>{{ newspaper.content|truncatewords:30 }}</p>
                 <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+
+                <p><strong>Topics:</strong></p>
+                <ul>
+                    {% for topic in newspaper.topics.all %}
+                        <li>{{ topic.name }}</li>
+                    {% endfor %}
+                </ul>
+
                 <p><strong>Authors:</strong></p>
                 <ul>
                     {% for author in newspaper.publishers.all %}
-                        <li>{{ author.first_name }} {{ author.last_name }}</li>
+                        <li>{{ author.first_name }} {{ author.last_name }} ({{ author.username }})</li>
                     {% endfor %}
                 </ul>
             </li>
@@ -24,5 +38,7 @@
             <li>No newspapers available.</li>
         {% endfor %}
     </ul>
+</div>
 </body>
 </html>
+
