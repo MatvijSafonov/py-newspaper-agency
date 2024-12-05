@@ -1,22 +1,17 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
 <div id="sidebar">
     <button id="toggle-sidebar">☰</button>
     <div id="sidebar-content">
-        {% if user.is_authenticated %}
-            <p>Account: {{ user.username }}</p>
-        {% else %}
-            <p>You are not in system</p>
-        {% endif %}
+        <p>Account: {{ user.username }}</p>
         <nav>
             <ul>
-                <li><a href="{% url 'base' %}">Main</a></li>
-                <li><a href="{% url 'newspaper-list' %}">Newspaper</a></li>
-                <li><a href="{% url 'topic-list' %}">Topic</a></li>
-                <li><a href="{% url 'redactor-list' %}">Redactor</a></li>
-                {% if user.is_authenticated %}
-                    <li><a href="{% url 'logout' %}">Logout</a></li>
-                {% else %}
-                    <li><a href="{% url 'login' %}">Login</a></li>
-                {% endif %}
+                <li><a href="{% url 'index' %}">Main</a></li>
+                <li><a href="{% url 'newspaper_agency:newspaper-list' %}">Newspaper</a></li>
+                <li><a href="{% url 'newspaper_agency:topic-list' %}">Topic</a></li>
+                <li><a href="{% url 'newspaper_agency:redactor-list' %}">Redactor</a></li>
+                <li><a href="{% url 'newspaper_agency:logout' %}">Logout</a></li>
             </ul>
         </nav>
     </div>

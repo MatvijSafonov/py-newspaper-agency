@@ -12,7 +12,7 @@ from .forms import RedactorForm
 
 
 class BaseView(TemplateView):
-    template_name = 'base.html'
+    template_name = 'newspaper_agency/index.html'
 
 
 class RegisterView(CreateView):
@@ -28,11 +28,11 @@ class RegisterView(CreateView):
 
 
 class LoginView(BaseLoginView):
-    template_name = ("registration/login.html")
+    template_name = "registration/login.html"
 
 class CustomLogoutView(LogoutView):
-    template_name = "logout.html"
-    next_page = reverse_lazy("login")
+    template_name = "registration/logout.html"
+    next_page = reverse_lazy("newspaper_agency:logout")
 
 class TopicListView(View):
     def get(self, request):

@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <title>{% block title %}Newspaper Agency{% endblock %}</title>
+    <p>Welcome to Best TODO Service Ever!</p>
+    <h2>Dynamic content</h2>
+    <p>The TODO service has the following record counts:</p>
+    <ul>
+        <li><strong>All tasks:</strong> {{ num_tasks }}</li>
+        <li><strong>Finished tasks:</strong> {{ num_finished_tasks }}</li>
+        <li><strong>Unfinished tasks:</strong> {{ num_unfinished_tasks }}</li>
+    </ul>
+
+    <p>You have visited this page
+        {{ num_visits }} time{{ num_visits|pluralize }}.
+    </p>
+
+{% endblock %}
