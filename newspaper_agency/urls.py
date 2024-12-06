@@ -13,11 +13,15 @@ from .views import (
     LoginView,
     RegisterView,
     CustomLogoutView,
+    TopicUpdateView,
+    TopicDeleteView,
 )
 
 urlpatterns = [
     path("topics/", TopicListView.as_view(), name="topic_list"),
     path("topic_form/", TopicCreateView.as_view(), name="topic_form"),
+    path('topic_update/<int:pk>/', TopicUpdateView.as_view(), name='topic_update'),
+    path('topics/<int:pk>/delete/', TopicDeleteView.as_view(), name='topic_delete'),
     path("newspaper_list/", NewspaperListView.as_view(), name="newspaper_list"),
     path("newspapers/<int:pk>/", NewspaperDetailView.as_view(), name="newspaper_detail"),
     path("redactors/", RedactorListView.as_view(), name="redactor_list"),

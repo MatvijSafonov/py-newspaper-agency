@@ -1,12 +1,4 @@
 /*common styles*/
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
-    padding: 0;
-    color: #333;
-}
-
 
 header {
     background-color: #333;
@@ -29,7 +21,7 @@ main {
 
 .block-content {
     background-color: #fff;
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -190,6 +182,7 @@ a:hover {
 }
 
 .content {
+    background-color: #fff;
     margin-left: 50px;
     padding: 20px;
     transition: margin-left 0.3s;
@@ -303,22 +296,231 @@ a:hover {
     opacity: 0.8;
 }
 
-/*form styles*/
-form input,
-form select,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
+/*Redactor update*/
+
+#edit-redactor-form {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+}
+
+.redactor-update-submit-button,
+.redactor-update-cancel-button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
     border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
     font-size: 1rem;
 }
 
-form input:focus,
-form select:focus,
-form textarea:focus {
-    border-color: #0044cc;
+.redactor-update-submit-button:hover,
+.redactor-update-cancel-button:hover {
+    background-color: #555;
+}
+
+.redactor-update-cancel-button {
+    background-color: #f44336;
+}
+
+.redactor-update-cancel-button:hover {
+    background-color: #d32f2f;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+    font-size: 1rem;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #333;
     outline: none;
-    box-shadow: 0 0 5px rgba(0, 68, 204, 0.3);
+    box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
+}
+
+/*topic create*/
+
+h1.page-title {
+    text-align: center;
+    color: #fff;
+    margin-top: -16px;
+}
+
+#topic-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.submit-button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 0 auto;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+#error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/*topic delete*/
+
+.confirm-delete-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.confirm-delete-container h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.confirm-delete-container p {
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.confirm-delete-button {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.confirm-delete-button:hover {
+    background-color: #c0392b;
+}
+
+.cancel-link {
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+    color: #45a049;
+    font-size: 16px;
+    transition: color 0.3s;
+}
+
+.cancel-link:hover {
+    color: #45a049;
+}
+
+/*redactor delete*/
+
+.delete-redactor-container {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    padding: 30px;
+    max-width: 500px;
+    margin: 50px auto;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+}
+
+.delete-redactor-container h1 {
+    color: #2c3e50;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.delete-redactor-container p {
+    color: #34495e;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+.delete-redactor-button {
+    background-color: #e74c3c;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 10px;
+}
+
+.delete-redactor-button:hover {
+    background-color: #c0392b;
+}
+
+.cancel-redactor-button {
+    background-color: #45a049;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.cancel-redactor-button:hover {
+    background-color: #45a049;
 }

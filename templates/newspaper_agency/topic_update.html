@@ -3,27 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Redactor</title>
+    <title>Edit Topic</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
     {% block sidebar %}
         {% include "includes/sidebar.html" %}
     {% endblock %}
-
     <div id="content" class="content">
-        <h1 class="page-title">Edit Redactor: {{ redactor.first_name }} {{ redactor.last_name }}</h1>
+        <h1 class="page-title">Edit Topic: {{ topic.name }}</h1>
 
-        <form method="post" id="edit-redactor-form">
+        <form method="post" id="edit-topic-form">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.as_p }}
             </div>
 
             <div class="action-buttons">
-                <button type="submit" class="redactor-update-submit-button">Edit</button>
-                <a href="{% url 'newspaper_agency:redactor_list' %}">
-                    <button type="button" class="redactor-update-cancel-button">Cancel</button>
+                <button type="submit" class="topic-update-submit-button">Update</button>
+                <a href="{% url 'newspaper_agency:topic_list' %}">
+                    <button type="button" class="topic-update-cancel-button">Cancel</button>
                 </a>
             </div>
         </form>
