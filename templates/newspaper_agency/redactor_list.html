@@ -19,8 +19,8 @@
             {% for redactor in redactors %}
                 <li class="redactor-item">
                     <strong>{{ redactor.first_name }} {{ redactor.last_name }}</strong> ({{ redactor.username }})
-                    <p class="experience">Years of Experience: {{ redactor.years_of_experience }}</p>
-                    
+                    <p id="redactor_info">Years of Experience: {{ redactor.years_of_experience }}</p>
+                    <p id="redactor_info">Email: {{redactor.email }}</p>
                     <div class="action-buttons">
                         <a href="{% url 'newspaper_agency:redactor_update' redactor.id %}" class="edit-button">
                             <button>Edit</button>
