@@ -10,14 +10,14 @@
     {% block sidebar %}
         {% include "includes/sidebar.html" %}
     {% endblock %}
-    
+
     <div id="content" class="content">
         <h1 class="page-title">List of Topics</h1>
         <p class="topic-count">Total number of topics: {{ total_topics }}</p>
         <a href="{% url 'newspaper_agency:topic_form' %}" class="create-topic-link">
             <button class="create-topic-button">Create New Topic</button>
         </a>
-        
+
         <ul class="topic-list">
             {% for topic in topics %}
                 <li class="topic-item">

@@ -4,8 +4,11 @@ from django.conf.urls.static import static
 from .views import (
     TopicListView,
     TopicCreateView,
+    TopicUpdateView,
+    TopicDeleteView,
     NewspaperListView,
     NewspaperDetailView,
+    NewspaperFormView,
     RedactorListView,
     RedactorCreateView,
     RedactorUpdateView,
@@ -13,8 +16,6 @@ from .views import (
     LoginView,
     RegisterView,
     CustomLogoutView,
-    TopicUpdateView,
-    TopicDeleteView,
 )
 
 urlpatterns = [
@@ -24,6 +25,7 @@ urlpatterns = [
     path('topics/<int:pk>/delete/', TopicDeleteView.as_view(), name='topic_delete'),
     path("newspaper_list/", NewspaperListView.as_view(), name="newspaper_list"),
     path("newspapers/<int:pk>/", NewspaperDetailView.as_view(), name="newspaper_detail"),
+    path('newspaper_form/', NewspaperFormView.as_view(), name='newspaper_form'),
     path("redactors/", RedactorListView.as_view(), name="redactor_list"),
     path("redactor_form/", RedactorCreateView.as_view(), name="redactor_form"),
     path("redactors/<int:pk>/update/", RedactorUpdateView.as_view(), name="redactor_update"),

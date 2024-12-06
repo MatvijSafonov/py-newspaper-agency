@@ -7,25 +7,27 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    {% block sidebar %}
-        {% include "includes/sidebar.html" %}
-    {% endblock %}
-    <div id="content" class="content">
-        <h1 class="page-title">Edit Topic: {{ topic.name }}</h1>
+{% block sidebar %}
+    {% include "includes/sidebar.html" %}
+{% endblock %}
+<div id="content" class="content">
+    <h1 class="page-title">Edit Topic: {{ topic.name }}</h1>
 
-        <form method="post" id="edit-topic-form">
-            {% csrf_token %}
-            <div class="form-group">
-                {{ form.as_p }}
-            </div>
+    <form method="post" id="edit-topic-form">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="edit-topic-form">Topic Name</label>
+            <input type="text" id="edit-topic-form" name="topic_name" class="form-input"
+                   value="{{ form.topic_name.value|default:'' }}">
+        </div>
 
-            <div class="action-buttons">
-                <button type="submit" class="topic-update-submit-button">Update</button>
-                <a href="{% url 'newspaper_agency:topic_list' %}">
-                    <button type="button" class="topic-update-cancel-button">Cancel</button>
-                </a>
-            </div>
-        </form>
-    </div>
+        <div class="action-buttons">
+            <button type="submit" class="topic-update-submit-button">Update</button>
+        </div>
+        <div class="action-buttons">
+            <a href="{% url 'newspaper_agency:topic_list' %}" class="topic-update-cancel-button">Cancel</a>
+        </div>
+    </form>
+</div>
 </body>
 </html>

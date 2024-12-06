@@ -14,14 +14,11 @@
     <div id="content" class="content">
         <h1 class="page-title">Create New Redactor</h1>
         
-        <form method="post">
+        <form method="post" id="redactor-form">
             {% csrf_token %}
             {{ form.as_p }}
             
             <button type="submit" class="submit-button">Save</button>
-            <a href="{% url 'newspaper_agency:redactor_list' %}" class="cancel-button">
-                <button type="button">Cancel</button>
-            </a>
         </form>
     </div>
 </body>

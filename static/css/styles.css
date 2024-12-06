@@ -1,4 +1,12 @@
 /*common styles*/
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
 
 header {
     background-color: #333;
@@ -20,8 +28,7 @@ main {
 
 
 .block-content {
-    background-color: #fff;
-    padding: 10px;
+    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
@@ -152,7 +159,7 @@ a:hover {
 }
 
 #content {
-    margin-left: 80px;
+    margin-left: 90px;
     padding: 20px;
     transition: margin-left 0.3s;
 }
@@ -179,13 +186,6 @@ a:hover {
 
 #toggle-sidebar-checkbox:checked ~ .content {
     margin-left: 250px;
-}
-
-.content {
-    background-color: #fff;
-    margin-left: 50px;
-    padding: 20px;
-    transition: margin-left 0.3s;
 }
 
 .topic-count {
@@ -222,6 +222,51 @@ a:hover {
     background-color: #555;
 }
 
+#newspaper-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#newspaper-form h1.page-title {
+    text-align: center;
+    color: #333;
+    margin-top: -16px;
+}
+
+#newspaper-form .form-group {
+    margin-bottom: 15px;
+}
+
+#newspaper-form .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+#newspaper-form .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#newspaper-form .submit-button:hover {
+    background-color: #45a049;
+}
+
+#newspaper-form #error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
 
 /*redactor_list*/
 
@@ -299,60 +344,83 @@ a:hover {
 /*Redactor update*/
 
 #edit-redactor-form {
-    background-color: #fff;
-    padding: 20px;
+    background-color: #ffffff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 20px 0;
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
 }
 
-.redactor-update-submit-button,
-.redactor-update-cancel-button {
-    background-color: #333;
-    color: #fff;
+#edit-redactor-form h1.page-title {
+    text-align: center;
+    color: #333;
+    margin-top: -16px;
+}
+
+#edit-redactor-form .form-group {
+    margin-bottom: 15px;
+}
+
+#edit-redactor-form .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+#edit-redactor-form .form-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+}
+
+
+
+#edit-redactor-form .redactor-update-submit-button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 10px auto;
+}
+
+#edit-redactor-form .redactor-update-submit-button:hover {
+    background-color: #45a049;
+}
+
+#edit-redactor-form .redactor-update-cancel-button {
+    background-color: #f44336;
+    color: #ffffff;
     border: none;
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 1rem;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 10px auto;
 }
 
-.redactor-update-submit-button:hover,
-.redactor-update-cancel-button:hover {
-    background-color: #555;
-}
-
-.redactor-update-cancel-button {
-    background-color: #f44336;
-}
-
-.redactor-update-cancel-button:hover {
+#edit-redactor-form .redactor-update-cancel-button:hover {
     background-color: #d32f2f;
 }
 
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    font-size: 1rem;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus {
-    border-color: #333;
-    outline: none;
-    box-shadow: 0 0 5px rgba(51, 51, 51, 0.3);
+#edit-redactor-form #error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
 /*topic create*/
@@ -457,12 +525,14 @@ h1.page-title {
 }
 
 .cancel-link {
-    display: inline-block;
-    margin-top: 10px;
-    text-decoration: none;
-    color: #45a049;
+    background-color: #45a049;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 12px 25px;
     font-size: 16px;
-    transition: color 0.3s;
+    cursor: pointer;
+    transition: background-color 0.3s;
 }
 
 .cancel-link:hover {
@@ -523,4 +593,151 @@ h1.page-title {
 
 .cancel-redactor-button:hover {
     background-color: #45a049;
+}
+
+/*Redactor form */
+
+#redactor-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#redactor-form h1.page-title {
+    text-align: center;
+    color: #fff;
+    margin-top: -16px;
+}
+
+#redactor-form .form-group {
+    margin-bottom: 15px;
+}
+
+#redactor-form .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+#redactor-form .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#redactor-form .submit-button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 10px auto;
+}
+
+#redactor-form .submit-button:hover {
+    background-color: #45a049;
+}
+
+
+#redactor-form #error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+/*edit topic form*/
+
+#edit-topic-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+#edit-topic-form h1.page-title {
+    text-align: center;
+    color: #333;
+    margin-top: -16px;
+}
+
+#edit-topic-form .form-group {
+    margin-bottom: 15px;
+}
+
+#edit-topic-form .form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+#edit-topic-form .form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+#edit-topic-form .topic-update-submit-button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: block;
+    margin: 10px auto;
+}
+
+#edit-topic-form .topic-update-submit-button:hover {
+    background-color: #45a049;
+}
+
+#edit-topic-form .topic-update-cancel-button {
+    background-color: #f44336;
+    color: #ffffff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+#edit-topic-form .topic-update-cancel-button:hover {
+    background-color: #d32f2f;
+}
+
+#edit-topic-form #error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+#edit-topic-form .action-buttons {
+    display: flex;
+    justify-content: center;
+    margin:5px 0;
 }

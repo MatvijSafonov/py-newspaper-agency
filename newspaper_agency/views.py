@@ -3,16 +3,15 @@ from django.contrib.auth.views import LogoutView
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic import TemplateView
 from django.shortcuts import get_object_or_404, render, redirect
-from django.http import JsonResponse
 from django.views import View
 from django.views.generic.edit import CreateView
 from django.urls import reverse_lazy, reverse
 from .models import Topic, Redactor, Newspaper
-from .forms import RedactorForm, TopicForm
+from .forms import RedactorForm, TopicForm, NewspaperForm
 
 
 class BaseView(TemplateView):
-    template_name = 'newspaper_agency/index.html'
+    template_name = "newspaper_agency/index.html"
 
 
 class RegisterView(CreateView):
@@ -43,39 +42,39 @@ class TopicListView(View):
             "topics": topics,
             "total_topics": topics.count()
         }
-        return render(request, 'newspaper_agency/topic_list.html', context)
+        return render(request, "newspaper_agency/topic_list.html", context)
 
 
 class TopicCreateView(View):
     def get(self, request):
-        return render(request, 'newspaper_agency/topic_form.html')
+        return render(request, "newspaper_agency/topic_form.html")
 
     def post(self, request):
-        name = request.POST.get('name')
+        name = request.POST.get("name")
         if name:
             topic, created = Topic.objects.get_or_create(name=name)
             if not created:
-                return render(request, 'newspaper_agency/topic_form.html',
-                              {'error': 'A topic with this name already exists.'})
-            return redirect('newspaper_agency:topic_list')
+                return render(request, "newspaper_agency/topic_form.html",
+                              {"error": "A topic with this name already exists."})
+            return redirect("newspaper_agency:topic_list")
 
-        return render(request, 'newspaper_agency/topic_form.html', {'error': 'Please provide a topic name.'})
+        return render(request, "newspaper_agency/topic_form.html", {"error": "Please provide a topic name."})
 
 
 class TopicUpdateView(UpdateView):
     model = Topic
     form_class = TopicForm
-    template_name = 'newspaper_agency/topic_update.html'
-    context_object_name = 'topic'
+    template_name = "newspaper_agency/topic_update.html"
+    context_object_name = "topic"
 
     def get_success_url(self):
-        return reverse('newspaper_agency:topic_list')
+        return reverse("newspaper_agency:topic_list")
 
 
 class TopicDeleteView(DeleteView):
     model = Topic
-    template_name = 'newspaper_agency/topic_delete.html'
-    success_url = reverse_lazy('newspaper_agency:topic_list')
+    template_name = "newspaper_agency/topic_delete.html"
+    success_url = reverse_lazy("newspaper_agency:topic_list")
 
 
 class NewspaperListView(View):
@@ -84,28 +83,41 @@ class NewspaperListView(View):
         context = {
             "newspapers": newspapers
         }
-        return render(request, 'newspaper_agency/newspaper_list.html', context)
+        return render(request, "newspaper_agency/newspaper_list.html", context)
 
 
 class NewspaperDetailView(View):
     def get(self, request, pk):
         newspaper = get_object_or_404(Newspaper.objects.prefetch_related("topics", "publishers"), pk=pk)
-        data = {
-            "id": newspaper.id,
-            "title": newspaper.title,
-            "content": newspaper.content,
-            "published_date": newspaper.published_date,
-            "topics": [topic.name for topic in newspaper.topics.all()],
-            "publishers": [
-                {
-                    "id": publisher.id,
-                    "name": f"{publisher.first_name} {publisher.last_name}",
-                    "username": publisher.username,
-                }
-                for publisher in newspaper.publishers.all()
-            ],
+
+        context = {
+            "newspaper": newspaper,
+            "topics": newspaper.topics.all(),
+            "publishers": newspaper.publishers.all(),
         }
-        return JsonResponse(data)
+        return render(request, "newspaper_agency/newspaper_detail.html", context)
+
+
+class NewspaperFormView(View):
+    def get(self, request):
+        publishers = Redactor.objects.all()
+        context = {
+            "publishers": publishers,
+            "topics": Topic.objects.all(),
+        }
+        return render(request, "newspaper_agency/newspaper_form.html", context)
+
+    def post(self, request):
+        form = NewspaperForm(request.POST)
+        if form.is_valid():
+            newspaper = form.save(commit=False)
+            newspaper.creator = request.user
+            newspaper.save()
+            form.save_m2m()
+            return redirect('newspaper_list')
+        else:
+            topics = Topic.objects.all()
+            return render(request, 'newspaper_agency/newspaper_form.html', {'form': form, 'topics': topics})
 
 
 class RedactorListView(View):
@@ -116,30 +128,30 @@ class RedactorListView(View):
             "redactors": redactors,
             "total_redactors": total_redactors
         }
-        return render(request, 'newspaper_agency/redactor_list.html', context)
+        return render(request, "newspaper_agency/redactor_list.html", context)
 
 
 class RedactorCreateView(View):
     def get(self, request):
         form = RedactorForm()
-        return render(request, 'newspaper_agency/redactor_form.html', {'form': form})
+        return render(request, "newspaper_agency/redactor_form.html", {"form": form})
 
     def post(self, request):
         form = RedactorForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('newspaper_agency:redactor_list')
-        return render(request, 'newspaper_agency/redactor_form.html', {'form': form})
+            return redirect("newspaper_agency:redactor_list")
+        return render(request, "newspaper_agency/redactor_form.html", {"form": form})
 
 
 class RedactorUpdateView(UpdateView):
     model = Redactor
-    fields = ['username', 'first_name', 'last_name', 'years_of_experience']
-    template_name = 'newspaper_agency/redactor_update.html'
-    success_url = reverse_lazy('newspaper_agency:redactor_list')
+    fields = ["username", "first_name", "last_name", "years_of_experience"]
+    template_name = "newspaper_agency/redactor_update.html"
+    success_url = reverse_lazy("newspaper_agency:redactor_list")
 
 
 class RedactorDeleteView(DeleteView):
     model = Redactor
-    template_name = 'newspaper_agency/redactor_delete.html'
-    success_url = reverse_lazy('newspaper_agency:redactor_list')
+    template_name = "newspaper_agency/redactor_delete.html"
+    success_url = reverse_lazy("newspaper_agency:redactor_list")
