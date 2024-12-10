@@ -161,72 +161,7 @@ a:hover {
     margin-left: 270px;
 }
 
-/* Newspaper List */
-#toggle-sidebar-checkbox {
-    display: none;
-}
-
-#toggle-sidebar-checkbox:checked + #sidebar {
-    left: 0;
-}
-
-#toggle-sidebar-checkbox:checked ~ #content {
-    margin-left: 250px;
-}
-
-#content {
-    margin-left: 90px;
-    padding: 20px;
-    transition: margin-left 0.3s ease;
-}
-
-#newspaper-form-title,
-.page-title {
-    margin-top: -17px;
-    color: #fff;
-    background-color: #333;
-    padding: 10px;
-    border-radius: 8px;
-    width: calc(100% - 20px);
-    box-sizing: border-box;
-}
-
-/* Topic List */
-.topic-count {
-    font-size: 1.2em;
-    margin-bottom: 15px;
-}
-
-.topic-list {
-    padding-left: 0;
-    list-style-type: none;
-    font-size: 1.1em;
-}
-
-.topic-item {
-    margin-bottom: 8px;
-}
-
-.create-topic-link {
-    display: inline-block;
-    margin-top: 20px;
-}
-
-.create-topic-button {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-}
-
-.create-topic-button:hover {
-    background-color: #555;
-}
-
-/* Topic Create */
+/* Forms and Buttons */
 #newspaper-form,
 #edit-redactor-form,
 #topic-form {
@@ -273,7 +208,6 @@ a:hover {
     box-shadow: 0 0 5px rgba(72, 239, 81, 0.5);
 }
 
-/* Buttons */
 .submit-button,
 .redactor-update-submit-button,
 .confirm-delete-button,
@@ -313,9 +247,6 @@ a:hover {
     color: #fff;
     border: none;
     border-radius: 5px;
-    padding: 12px 25px;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
 }
 
 .confirm-delete-button:hover {
@@ -326,74 +257,30 @@ a:hover {
     background-color: #45a049;
     color: #fff;
     border: none;
-    border-radius: 5px;
-    padding: 12px 25px;
-    font-size: 16px;
 }
 
 .cancel-link:hover {
     background-color: #3e8e41;
 }
 
-/* Error messages */
-#error-message,
-#edit-redactor-form #error-message {
-    color: #d9534f;
-    font-size: 14px;
-    margin-bottom: 15px;
-    text-align: center;
-}
+@media (max-width: 768px) {
+    .content-container {
+        padding: 15px;
+    }
 
-/* Delete Confirmation */
-.confirm-delete-container {
-    background-color: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
-    padding: 30px;
-    max-width: 500px;
-    margin: 50px auto;
-    text-align: center;
-    font-family: 'Arial', sans-serif;
-}
+    .content-container h2 {
+        font-size: 1.5rem;
+    }
 
-.confirm-delete-container h1 {
-    color: #2c3e50;
-    margin-bottom: 20px;
-    font-size: 24px;
-}
+    .content-container p,
+    .content-container li {
+        font-size: 0.9rem;
+    }
 
-.confirm-delete-container p {
-    color: #34495e;
-    font-size: 16px;
-}
-
-.confirm-delete-buttons {
-    display: flex;
-    justify-content: space-around;
-}
-
-.confirm-delete-buttons button {
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    border: none;
-    outline: none;
-}
-
-.confirm-delete-buttons .confirm-delete {
-    background-color: #e74c3c;
-    color: #fff;
-}
-
-.confirm-delete-buttons .confirm-delete:hover {
-    background-color: #c0392b;
-}
-
-.confirm-delete-buttons .cancel {
-    background-color: #45a049;
-    color: #fff;
-}
-
-.confirm-delete-buttons .cancel:hover {
-    background-color: #3e8e41;
+    .submit-button,
+    .confirm-delete-button,
+    .cancel-link {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
 }

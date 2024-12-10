@@ -3,40 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redactor List</title>
+    <title>Newspaper List</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    {% block sidebar %}
-        {% include "includes/sidebar.html" %}
-    {% endblock %}
-    
-    <div id="content" class="content">
-        <h1 class="page-title">List of Redactors</h1>
-        <p class="redactor-count">Total number of redactors: {{ total_redactors }}</p>
-        <a href="{% url 'newspaper_agency:redactor_form' %}" class="create-redactor-link">
-            <button class="create-redactor-button">Create New Redactor</button>
-        </a>
-        
-        <ul class="redactor-list">
-            {% for redactor in redactors %}
-                <li class="redactor-item">
-                    <strong>{{ redactor.first_name }} {{ redactor.last_name }}</strong> ({{ redactor.username }})
-                    <p id="redactor_info">Years of Experience: {{ redactor.years_of_experience }}</p>
-                    <p id="redactor_info">Email: {{redactor.email }}</p>
-                    <div class="action-buttons">
-                        <a href="{% url 'newspaper_agency:redactor_update' redactor.id %}" class="edit-button">
-                            <button>Edit</button>
-                        </a>
-                        <a href="{% url 'newspaper_agency:redactor_delete' redactor.id %}" class="delete-button">
-                            <button>Delete</button>
-                        </a>
-                    </div>
-                </li>
-            {% empty %}
-                <li class="redactor-item">No redactors available.</li>
-            {% endfor %}
-        </ul>
+{% block sidebar %}
+    {% include "includes/sidebar.html" %}
+{% endblock %}
+
+<div id="content">
+    <h1 class="page-title">List of Newspapers</h1>
+
+    <div class="create-new-newspaper">
+        <a href="{% url 'newspaper_agency:newspaper_form' %}" class="create-new-button">Create New Newspaper</a>
     </div>
+
+    <ul>
+        {% for newspaper in newspapers %}
+            <li>
+                <h2><a href="{% url 'newspaper_agency:newspaper_detail' newspaper.id %}">{{ newspaper.title }}</a></h2>
+                <p>{{ newspaper.content|truncatewords:30 }}</p>
+                <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+                <p><strong>Created By:</strong> {{ newspaper.created_by.first_name }} {{ newspaper.created_by.last_name }} ({{ newspaper.created_by.username }})</p>
+                <p><strong>Created At:</strong> {{ newspaper.created_at|date:"Y-m-d H:i:s" }}</p>
+
+                <p><strong>Topics:</strong></p>
+                <ul>
+                    {% for topic in newspaper.topics.all %}
+                        <li>{{ topic.name }}</li>
+                    {% endfor %}
+                </ul>
+
+                {% if user.is_authenticated %}
+                    {% if user == newspaper.created_by or user.is_staff %}
+                        <div class="newspaper-actions">
+                            <a href="{% url 'newspaper_agency:newspaper_edit' newspaper.id %}" class="edit-button">Edit</a>
+                            <form method="post" action="{% url 'newspaper_agency:newspaper_delete' newspaper.id %}" style="display:inline;">
+                                {% csrf_token %}
+                                <button type="submit" class="delete-button" onclick="return confirm('Are you sure you want to delete this newspaper?')">Delete</button>
+                            </form>
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </li>
+        {% empty %}
+            <li>No newspapers available.</li>
+        {% endfor %}
+    </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if newspapers.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ newspapers.previous_page_number }}">Previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ newspapers.number }} of {{ newspapers.paginator.num_pages }}.
+            </span>
+            
+            {% if newspapers.has_next %}
+                <a href="?page={{ newspapers.next_page_number }}">Next</a>
+                <a href="?page={{ newspapers.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
 </body>
 </html>

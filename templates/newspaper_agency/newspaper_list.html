@@ -21,7 +21,7 @@
     <ul>
         {% for newspaper in newspapers %}
             <li>
-                <h2>{{ newspaper.title }}</h2>
+                <h2><a href="{% url 'newspaper_agency:newspaper_detail' newspaper.id %}">{{ newspaper.title }}</a></h2>
                 <p>{{ newspaper.content|truncatewords:30 }}</p>
                 <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
                 <p><strong>Created By:</strong> {{ newspaper.created_by.first_name }} {{ newspaper.created_by.last_name }} ({{ newspaper.created_by.username }})</p>
@@ -50,6 +50,24 @@
             <li>No newspapers available.</li>
         {% endfor %}
     </ul>
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if newspapers.has_previous %}
+                <a href="?page=1">&laquo; First</a>
+                <a href="?page={{ newspapers.previous_page_number }}">Previous</a>
+            {% endif %}
+            
+            <span class="current">
+                Page {{ newspapers.number }} of {{ newspapers.paginator.num_pages }}.
+            </span>
+            
+            {% if newspapers.has_next %}
+                <a href="?page={{ newspapers.next_page_number }}">Next</a>
+                <a href="?page={{ newspapers.paginator.num_pages }}">Last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
 </div>
 </body>
 </html>

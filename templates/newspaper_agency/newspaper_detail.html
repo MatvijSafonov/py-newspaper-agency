@@ -1,32 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ newspaper.title }}</title>
-</head>
-<body>
-<h1>{{ newspaper.title }}</h1>
-<p>{{ newspaper.content }}</p>
-<p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+{% extends "base.html" %}
 
-<h2>Topics:</h2>
-<ul>
-    {% for topic in topics %}
-        <li>{{ topic.name }}</li>
-    {% endfor %}
-</ul>
+{% block content %}
+<div class="content-container">
+    <h1 class="page-title">{{ newspaper.title }}</h1>
+    <p>{{ newspaper.content }}</p>
+    <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+    <p><strong>Created By:</strong> {{ newspaper.created_by.username }}</p>
+    <p><strong>Created At:</strong> {{ newspaper.created_at|date:"Y-m-d H:i:s" }}</p>
 
-<h2>Authors:</h2>
-<ul>
-    {% for publisher in publishers %}
-        <li>{{ publisher.first_name }} {{ publisher.last_name }} ({{ publisher.username }})</li>
-    {% endfor %}
-</ul>
+    <div class="topics-section">
+        <h2>Topics:</h2>
+        <ul class="topic-list">
+            {% for topic in newspaper.topics.all %}
+                <li class="topic-item">{{ topic.name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 
-{% if user.is_authenticated and user.is_superuser or user in newspaper.publishers.all %}
-    <a href="{% url 'edit_newspaper' newspaper.id %}">Edit</a>
-    <a href="{% url 'delete_newspaper' newspaper.id %}">Delete</a>
-{% endif %}
-</body>
-</html>
+    {% if user.is_authenticated and user == newspaper.created_by %}
+    <div class="newspaper-actions">
+        <a href="{% url 'newspaper_agency:newspaper_edit' newspaper.id %}" class="create-topic-button">Edit</a>
+        <form method="post" action="{% url 'newspaper_agency:newspaper_delete' newspaper.id %}" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="confirm-delete-button" onclick="return confirm('Are you sure you want to delete this newspaper?')">Delete</button>
+        </form>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

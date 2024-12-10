@@ -19,6 +19,8 @@ class Newspaper(models.Model):
     published_date = models.DateField()
     topics = models.ManyToManyField(Topic, related_name="newspapers")
     publishers = models.ManyToManyField(Redactor, related_name="newspapers")
+    created_by = models.ManyToManyField(Redactor, related_name="created_newspapers")
 
     def __str__(self):
         return self.title
+
