@@ -164,6 +164,16 @@ a:hover {
     transition: margin-left 0.3s;
 }
 
+#newspaper-form-title {
+    margin-top: -17px;
+    color: #fff;
+    background-color: #333;
+    padding: 10px;
+    border-radius: 5px;
+    width: calc(100% - 20px);
+    box-sizing: border-box;
+}
+
 .page-title {
     margin-top: -17px;
     color: #fff;
@@ -380,21 +390,6 @@ a:hover {
     box-sizing: border-box;
 }
 
-
-
-#edit-redactor-form .redactor-update-submit-button {
-    background-color: #4CAF50;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 10px auto;
-}
-
 #edit-redactor-form .redactor-update-submit-button:hover {
     background-color: #45a049;
 }
@@ -428,7 +423,6 @@ a:hover {
 h1.page-title {
     text-align: center;
     color: #fff;
-    margin-top: -16px;
 }
 
 #topic-form {
@@ -694,19 +688,6 @@ h1.page-title {
     font-size: 16px;
 }
 
-#edit-topic-form .topic-update-submit-button {
-    background-color: #4CAF50;
-    color: #ffffff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-    display: block;
-    margin: 10px auto;
-}
-
 #edit-topic-form .topic-update-submit-button:hover {
     background-color: #45a049;
 }
@@ -740,4 +721,51 @@ h1.page-title {
     display: flex;
     justify-content: center;
     margin:5px 0;
+}
+
+/*login*/
+
+h1.page-title {
+    text-align: center;
+    color: #fff;
+}
+
+#login-form {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 100%;
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-size: 14px;
+}
+
+.form-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+#error-message {
+    color: #d9534f;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
 }

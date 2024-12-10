@@ -8,45 +8,50 @@
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
-    <div id="newspaper-form">
-        <h1 id="newspaper-form-title">Create a New Newspaper</h1>
-        <form method="post">
-            {% csrf_token %}
-            <div class="form-group">
-                <label for="title" class="form-label">Title:</label>
-                <input type="text" id="title" name="title" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label for="content2" class="form-label">Content:</label>
-                <textarea id="content2" name="content" class="form-input" rows="5" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="published_date" class="form-label">Published Date:</label>
-                <input type="date" id="published_date" name="published_date" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label for="topics" class="form-label">Topics:</label>
-                <select id="topics" name="topics" class="form-input" required>
-                    {% for topic in topics %}
-                        <option value="{{ topic.id }}">{{ topic.name }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="publishers" class="form-label">Publishers:</label>
-                <select id="publishers" name="publishers" class="form-input" required>
-                    {% for publisher in publishers %}
-                        <option value="{{ publisher.id }}">{{ publisher.username }} ({{ publisher.first_name }} {{ publisher.last_name }})</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <button type="submit" class="submit-button">Create Newspaper</button>
-        </form>
-        <div id="error-message">
-            {% if form.errors %}
-                <p>Please fix the errors above.</p>
-            {% endif %}
+{% block sidebar %}
+    {% include "includes/sidebar.html" %}
+{% endblock %}
+<div id="newspaper-form">
+    <h1 id="newspaper-form-title">Create a New Newspaper</h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="title" class="form-label">Title:</label>
+            <input type="text" id="title" name="title" class="form-input" required>
         </div>
+        <div class="form-group">
+            <label for="content2" class="form-label">Content:</label>
+            <textarea id="content2" name="content" class="form-input" rows="5" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="published_date" class="form-label">Published Date:</label>
+            <input type="date" id="published_date" name="published_date" class="form-input" required>
+        </div>
+        <div class="form-group">
+            <label for="topics" class="form-label">Topics:</label>
+            <select id="topics" name="topics" class="form-input" required>
+                {% for topic in topics %}
+                    <option value="{{ topic.id }}">{{ topic.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="publishers" class="form-label">Publishers:</label>
+            <select id="publishers" name="publishers" class="form-input" required>
+                {% for publisher in publishers %}
+                    <option value="{{ publisher.id }}">{{ publisher.username }}
+                        ({{ publisher.first_name }} {{ publisher.last_name }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="submit-button">Create Newspaper</button>
+    </form>
+    <div id="error-message">
+        {% if form.errors %}
+            <p>Please fix the errors above.</p>
+        {% endif %}
     </div>
+</div>
 </body>
 </html>

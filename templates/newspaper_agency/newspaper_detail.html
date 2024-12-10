@@ -24,7 +24,7 @@
     {% endfor %}
 </ul>
 
-{% if user.is_authenticated and (user.is_superuser or user in newspaper.publishers.all) %}
+{% if user.is_authenticated and user.is_superuser or user in newspaper.publishers.all %}
     <a href="{% url 'edit_newspaper' newspaper.id %}">Edit</a>
     <a href="{% url 'delete_newspaper' newspaper.id %}">Delete</a>
 {% endif %}
