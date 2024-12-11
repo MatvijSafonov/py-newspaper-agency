@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="block-content">
+        <h2>Welcome to the "Newspaper Agency"!</h2>
+        <p>We bring you the freshest and most relevant news, prepared by our professional editorial team.</p>
+
+        <h3>Publication Statistics</h3>
+        <p>On our site, you can find the following information:</p>
+        <ul>
+            <li><strong>Total number of topics:</strong> {{ num_topics }}</li>
+            <li><strong>Number of redactors:</strong> {{ num_redactors }}</li>
+            <li><strong>Total number of newspapers:</strong> {{ num_newspapers }}</li>
+        </ul>
+
+        <h3>Random Articles</h3>
+        <ul>
+            {% for newspaper in random_newspapers %}
+                <li>
+                    <a href="{% url "newspaper_agency:newspaper_detail" newspaper.id %}">
+                        {{ newspaper.title }}
+                    </a>
+                </li>
+            {% empty %}
+                <li>No articles available</li>
+            {% endfor %}
+        </ul>
+
+        <p>You have visited this page
+            {{ num_visits }} time{{ num_visits|pluralize }}.
+        </p>
+    </div>
+{% endblock %}

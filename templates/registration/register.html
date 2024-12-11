@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+    <header>
+        <h1>Register</h1>
+    </header>
+    <main>
+        <div class="block-content">
+            <form method="post" action="{% url "newspaper_agency:register" %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    {{ form.as_p }}
+                </div>
+                <button type="submit" class="submit-button">Register</button>
+            </form>
+        </div>
+        <p class="text-center">Already have an account? <a href="{% url "newspaper_agency:login" %}">Login here</a>.</p>
+    </main>
+</body>
+</html>
+

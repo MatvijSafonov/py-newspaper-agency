@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="content-container">
+        <h1>{{ newspaper.title }}</h1>
+        <p>{{ newspaper.content }}</p>
+        <p><strong>Published Date:</strong> {{ newspaper.published_date }}</p>
+        <p><strong>Created By:</strong> {{ newspaper.created_by.username }}</p>
+        <p><strong>Created At:</strong> {{ newspaper.created_at|date:"Y-m-d H:i:s" }}</p>
+
+        <div class="topics-section">
+            <h2>Topics:</h2>
+            <ul class="topic-list">
+                {% for topic in newspaper.topics.all %}
+                    <li class="topic-item">{{ topic.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="action-buttons">
+            <a href="{% url "newspaper_agency:newspaper_update" newspaper.id %}" class="edit-button">
+                <button>Edit</button>
+            </a>
+            <a href="{% url "newspaper_agency:newspaper_delete" newspaper.id %}" class="delete-button">
+                <button>Delete</button>
+            </a>
+        </div>
+    </div>
+{% endblock %}

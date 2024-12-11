@@ -1,0 +1,60 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redactor List</title>
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
+</head>
+<body>
+    {% block sidebar %}
+        {% include "includes/sidebar.html" %}
+    {% endblock %}
+
+    <div id="content" class="content">
+        <h1 class="page-title">List of Redactors</h1>
+        <p class="redactor-count">Total number of redactors: {{ total_redactors }}</p>
+        <a href="{% url 'newspaper_agency:redactor_form' %}" class="create-redactor-link">
+            <button class="create-redactor-button">Create New Redactor</button>
+        </a>
+
+        <ul class="redactor-list">
+            {% for redactor in redactors %}
+                <li class="redactor-item">
+                    <strong>{{ redactor.first_name }} {{ redactor.last_name }}</strong> ({{ redactor.username }})
+                    <p id="redactor_info">Years of Experience: {{ redactor.years_of_experience }}</p>
+                    <p id="redactor_info">Email: {{ redactor.email }}</p>
+                    <div class="action-buttons">
+                        <a href="{% url 'newspaper_agency:redactor_update' redactor.id %}" class="edit-button">
+                            <button>Edit</button>
+                        </a>
+                        <a href="{% url 'newspaper_agency:redactor_delete' redactor.id %}" class="delete-button">
+                            <button>Delete</button>
+                        </a>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="redactor-item">No redactors available.</li>
+            {% endfor %}
+        </ul>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if redactors.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ redactors.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ redactors.number }} of {{ redactors.paginator.num_pages }}.
+                </span>
+
+                {% if redactors.has_next %}
+                    <a href="?page={{ redactors.next_page_number }}">Next</a>
+                    <a href="?page={{ redactors.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+    </div>
+</body>
+</html>
