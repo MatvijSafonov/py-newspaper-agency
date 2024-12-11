@@ -17,7 +17,7 @@
         <ul>
             {% for newspaper in random_newspapers %}
                 <li>
-                    <a href="{% url 'newspaper_agency:newspaper_detail' newspaper.id %}">
+                    <a href="{% url "newspaper_agency:newspaper_detail" newspaper.id %}">
                         {{ newspaper.title }}
                     </a>
                 </li>

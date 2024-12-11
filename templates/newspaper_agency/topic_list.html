@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Topic List</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
     {% block sidebar %}
@@ -14,7 +14,7 @@
     <div id="content" class="content">
         <h1 class="page-title">List of Topics</h1>
         <p class="topic-count">Total number of topics: {{ total_topics }}</p>
-        <a href="{% url 'newspaper_agency:topic_form' %}" class="create-topic-link">
+        <a href="{% url "newspaper_agency:topic_form" %}" class="create-topic-link">
             <button class="create-topic-button">Create New Topic</button>
         </a>
 
@@ -23,10 +23,10 @@
                 <li class="topic-item">
                     <strong>{{ topic.name }}</strong>
                     <div class="action-buttons">
-                        <a href="{% url 'newspaper_agency:topic_update' topic.id %}" class="edit-button">
+                        <a href="{% url "newspaper_agency:topic_update" topic.id %}" class="edit-button">
                             <button>Edit</button>
                         </a>
-                        <a href="{% url 'newspaper_agency:topic_delete' topic.id %}" class="delete-button">
+                        <a href="{% url "newspaper_agency:topic_delete" topic.id %}" class="delete-button">
                             <button>Delete</button>
                         </a>
                     </div>
@@ -35,6 +35,24 @@
                 <li class="topic-item">No topics available.</li>
             {% endfor %}
         </ul>
+
+        <div class="pagination">
+            <span class="step-links">
+                {% if topics.has_previous %}
+                    <a href="?page=1">&laquo; First</a>
+                    <a href="?page={{ topics.previous_page_number }}">Previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ topics.number }} of {{ topics.paginator.num_pages }}.
+                </span>
+
+                {% if topics.has_next %}
+                    <a href="?page={{ topics.next_page_number }}">Next</a>
+                    <a href="?page={{ topics.paginator.num_pages }}">Last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
 </body>
 </html>

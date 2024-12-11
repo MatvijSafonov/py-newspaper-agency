@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+<link rel="stylesheet" href="{% static "css/styles.css" %}">
 
 <input type="checkbox" id="toggle-sidebar-checkbox" hidden>
 <label id="toggle-sidebar" for="toggle-sidebar-checkbox">☰</label>
@@ -9,11 +9,11 @@
         <p>Account: {{ user.username }}</p>
         <nav>
             <ul>
-                <li><a href="{% url 'newspaper_agency:index' %}">Main</a></li>
-                <li><a href="{% url 'newspaper_agency:newspaper_list' %}">Newspaper</a></li>
-                <li><a href="{% url 'newspaper_agency:topic_list' %}">Topic</a></li>
-                <li><a href="{% url 'newspaper_agency:redactor_list' %}">Redactor</a></li>
-                <li><a href="{% url 'newspaper_agency:logout' %}">Logout</a></li>
+                <li><a href="{% url "newspaper_agency:index" %}">Main</a></li>
+                <li><a href="{% url "newspaper_agency:newspaper_list" %}">Newspaper</a></li>
+                <li><a href="{% url "newspaper_agency:topic_list" %}">Topic</a></li>
+                <li><a href="{% url "newspaper_agency:redactor_list" %}">Redactor</a></li>
+                <li><a href="{% url "newspaper_agency:logout" %}">Logout</a></li>
             </ul>
         </nav>
     </div>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Logout</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
 <header>
@@ -12,12 +12,8 @@
 </header>
 <main>
     <div class="block-content">
-{#        <form method="POST" action="{% url 'newspaper_agency:logout' %}">#}
-{#            {% csrf_token %}#}
-{#            <button type="submit" class="submit-button">Logout</button>#}
-{#        </form>#}
         <p style="text-align: center; margin-top: 15px;">You have successfully logged out. <a
-                href="{% url 'newspaper_agency:login' %}">Login again?</a></p>
+                href="{% url "newspaper_agency:login" %}">Login again?</a></p>
     </div>
 </main>
 </body>

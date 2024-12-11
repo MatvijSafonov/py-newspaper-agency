@@ -19,20 +19,20 @@ class BaseView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['num_topics'] = Topic.objects.count()
-        context['num_redactors'] = Redactor.objects.count()
-        context['num_newspapers'] = Newspaper.objects.count()
+        context["num_topics"] = Topic.objects.count()
+        context["num_redactors"] = Redactor.objects.count()
+        context["num_newspapers"] = Newspaper.objects.count()
 
-        num_visits = self.request.session.get('num_visits', 0) + 1
-        self.request.session['num_visits'] = num_visits
-        context['num_visits'] = num_visits
+        num_visits = self.request.session.get("num_visits", 0) + 1
+        self.request.session["num_visits"] = num_visits
+        context["num_visits"] = num_visits
 
         newspaper_list = Newspaper.objects.all()
 
         if len(newspaper_list) > 3:
-            context['random_newspapers'] = random.sample(list(newspaper_list), 3)
+            context["random_newspapers"] = random.sample(list(newspaper_list), 3)
         else:
-            context['random_newspapers'] = newspaper_list
+            context["random_newspapers"] = newspaper_list
 
         return context
 
@@ -40,7 +40,7 @@ class BaseView(TemplateView):
 class RegisterView(CreateView):
     template_name = "registration/register.html"
     form_class = RedactorForm
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("newspaper_agency:login")
 
     def form_valid(self, form):
         user = form.save(commit=False)
@@ -162,6 +162,23 @@ class NewspaperFormView(View):
         newspaper.topics.set(topic_ids)
 
         return redirect("newspaper_agency:newspaper_list")
+
+
+class NewspaperUpdateView(UpdateView):
+    model = Newspaper
+    fields = ["title", "content", "published_date", "topics"]
+    template_name = "newspaper_agency/newspaper_update.html"
+    context_object_name = "newspaper"
+
+    def get_success_url(self):
+        return reverse_lazy("newspaper_agency:newspaper_detail", kwargs={"pk": self.object.pk})
+
+
+class NewspaperDeleteView(DeleteView):
+    model = Newspaper
+    template_name = "newspaper_agency/newspaper_delete.html"
+    context_object_name = "newspaper"
+    success_url = reverse_lazy("newspaper_agency:newspaper_list")
 
 
 class RedactorListView(View):

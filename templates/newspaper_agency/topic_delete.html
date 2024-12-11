@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Confirm Delete</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
     <div class="confirm-delete-container">
@@ -13,7 +13,7 @@
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="confirm-delete-button">Yes, delete</button>
-            <a href="{% url 'newspaper_agency:topic_list' %}" class="cancel-link">Cancel</a>
+            <a href="{% url "newspaper_agency:topic_list" %}" class="cancel-link">Cancel</a>
         </form>
     </div>
 </body>

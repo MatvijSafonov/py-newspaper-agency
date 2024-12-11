@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Topic</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
 {% block sidebar %}
@@ -18,14 +18,14 @@
         <div class="form-group">
             <label for="edit-topic-form">Topic Name</label>
             <input type="text" id="edit-topic-form" name="topic_name" class="form-input"
-                   value="{{ form.topic_name.value|default:'' }}">
+                   value="{{ form.topic_name.value|default:"" }}">
         </div>
 
         <div class="action-buttons">
-            <button type="submit" class="topic-update-submit-button">Update</button>
+            <button type="submit" class="submit-button">Update</button>
         </div>
         <div class="action-buttons">
-            <a href="{% url 'newspaper_agency:topic_list' %}" class="topic-update-cancel-button">Cancel</a>
+            <a href="{% url "newspaper_agency:topic_list" %}" class="cancel-button">Cancel</a>
         </div>
     </form>
 </div>

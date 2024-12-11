@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Redactor</title>
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="stylesheet" href="{% static "css/styles.css" %}">
 </head>
 <body>
     <div class="delete-redactor-container">
@@ -14,7 +14,7 @@
         <form method="post">
             {% csrf_token %}
             <button type="submit" class="delete-redactor-button">Yes, Delete</button>
-            <a href="{% url 'newspaper_agency:redactor_list' %}">
+            <a href="{% url "newspaper_agency:redactor_list" %}">
                 <button type="button" class="cancel-redactor-button">Cancel</button>
             </a>
         </form>
